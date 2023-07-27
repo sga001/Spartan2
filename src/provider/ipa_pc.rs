@@ -182,7 +182,7 @@ where
     b"IPA"
   }
 
-  fn prove(
+  pub fn prove(
     ck: &CommitmentKey<G>,
     ck_c: &CommitmentKey<G>,
     U: &InnerProductInstance<G>,
@@ -295,7 +295,7 @@ where
     })
   }
 
-  fn verify(
+  pub fn verify(
     &self,
     ck: &CommitmentKey<G>,
     ck_c: &CommitmentKey<G>,
