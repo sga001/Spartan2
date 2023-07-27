@@ -150,7 +150,8 @@ impl<G: Group> TranscriptReprTrait<G> for InnerProductInstance<G> {
   }
 }
 
-struct InnerProductWitness<G: Group> {
+/// An inner product witness consists the vector `a`.
+pub struct InnerProductWitness<G: Group> {
   a_vec: Vec<G::Scalar>,
 }
 
@@ -165,7 +166,7 @@ impl<G: Group> InnerProductWitness<G> {
 /// An inner product argument
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(bound = "")]
-struct InnerProductArgument<G: Group> {
+pub struct InnerProductArgument<G: Group> {
   L_vec: Vec<CompressedCommitment<G>>,
   R_vec: Vec<CompressedCommitment<G>>,
   a_hat: G::Scalar,
