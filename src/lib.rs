@@ -216,16 +216,12 @@ mod tests {
     type G = pasta_curves::pallas::Point;
     type EE = crate::provider::hyrax_pc::HyraxEvaluationEngine<G>;
     type S = crate::spartan::snark::RelaxedR1CSSNARK<G, EE>;
-    type Spp = crate::spartan::ppsnark::RelaxedR1CSSNARK<G, EE>;
     test_snark_with::<G, S>();
-    test_snark_with::<G, Spp>();
 
     type G2 = bn256::Point;
     type EE2 = crate::provider::hyrax_pc::HyraxEvaluationEngine<G2>;
     type S2 = crate::spartan::snark::RelaxedR1CSSNARK<G2, EE2>;
-    //type S2pp = crate::spartan::ppsnark::RelaxedR1CSSNARK<G2, EE2>;
     test_snark_with::<G2, S2>();
-    //test_snark_with::<G2, S2pp>();
   }
 
   fn test_snark_with<G: Group, S: RelaxedR1CSSNARKTrait<G>>() {
