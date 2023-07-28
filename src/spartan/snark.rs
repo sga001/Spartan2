@@ -240,7 +240,7 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> RelaxedR1CSSNARKTrait<G
     w_u_vec.push((
       PolyEvalWitness { p: W.W.clone() },
       PolyEvalInstance {
-        c: U.comm_W,
+        c: U.comm_W.clone(),
         x: r_y[1..].to_vec(),
         e: eval_W,
       },
@@ -249,7 +249,7 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> RelaxedR1CSSNARKTrait<G
     w_u_vec.push((
       PolyEvalWitness { p: W.E },
       PolyEvalInstance {
-        c: U.comm_E,
+        c: U.comm_E.clone(),
         x: r_x,
         e: eval_E,
       },
@@ -312,7 +312,7 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> RelaxedR1CSSNARKTrait<G
     let comm_joint = u_vec_padded
       .iter()
       .zip(powers_of_gamma.iter())
-      .map(|(u, g_i)| u.c * *g_i)
+      .map(|(u, g_i)| u.c.clone() * *g_i)
       .fold(Commitment::<G>::default(), |acc, item| acc + item);
     let poly_joint = PolyEvalWitness::weighted_sum(&w_vec_padded, &powers_of_gamma);
     let eval_joint = claims_batch_left
@@ -451,12 +451,12 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> RelaxedR1CSSNARKTrait<G
     // add claims about W and E polynomials
     let u_vec: Vec<PolyEvalInstance<G>> = vec![
       PolyEvalInstance {
-        c: U.comm_W,
+        c: U.comm_W.clone(),
         x: r_y[1..].to_vec(),
         e: self.eval_W,
       },
       PolyEvalInstance {
-        c: U.comm_E,
+        c: U.comm_E.clone(),
         x: r_x,
         e: self.eval_E,
       },
@@ -507,7 +507,7 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> RelaxedR1CSSNARKTrait<G
     let comm_joint = u_vec_padded
       .iter()
       .zip(powers_of_gamma.iter())
-      .map(|(u, g_i)| u.c * *g_i)
+      .map(|(u, g_i)| u.c.clone() * *g_i)
       .fold(Commitment::<G>::default(), |acc, item| acc + item);
     let eval_joint = self
       .evals_batch

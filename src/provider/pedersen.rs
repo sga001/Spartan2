@@ -185,6 +185,7 @@ impl<G: Group> CommitmentEngineTrait<G> for CommitmentEngine<G> {
   }
 }
 
+/// Additional extensions on the commitment engine
 pub trait CommitmentEngineExtTrait<G: Group>: CommitmentEngineTrait<G> {
   /// Splits the commitment key into two pieces at a specified point
   fn split_at(ck: &Self::CommitmentKey, n: usize) -> (Self::CommitmentKey, Self::CommitmentKey);
